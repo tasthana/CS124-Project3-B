@@ -9,4 +9,4 @@ add_executable(Project3
         AVLTree.h
         BinarySearchTree.h
         main.cpp
-        SplayTree.h)
+        SplayTree.h subscribe.h)

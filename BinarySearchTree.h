@@ -34,18 +34,20 @@ private:
     }
 
     // Helper recursive function to find a value in the tree.
-    bool find(const Comparable &c, BinaryNode* n) const {
+    bool find(const Comparable &c, BinaryNode* n, int &depth_value) const {
         if (n == nullptr) {
             // Reached a dead end. Value not in tree.
             return false;
         }
         if (c < n->value) {
             // Value is less than current node. Go to node's left child.
-            return find(c, n->leftChild);
+            depth_value++;
+            return find(c, n->leftChild, depth_value);
         }
         if (n->value < c) {
             // Value is greater than current node. Go to node's right child.
-            return find(c, n->rightChild);
+            depth_value++;
+            return find(c, n->rightChild, depth_value);
         }
         // If code reaches here, c == n->value. Node found!
         return true;
@@ -135,9 +137,9 @@ public:
         return (root == nullptr);
     }
 
-    bool find(const Comparable &c) const {
+    bool find(const Comparable &c, int &depth_value) const {
         // calls private helper function
-        return find(c, root);
+        return find(c, root, depth_value);
     }
 
     void add(const Comparable &c) {
